@@ -22,17 +22,24 @@ $app->get('/tasksIsnack/', function() use ( $app ) {
 });
 
 $app->get('/tasksEdy/', function() use ( $app ) {
+    $tasks = getTasks();   
+    echo json_encode($tasks);
+});
+
+function getTasks()
+{
     $tasks[] = array(
             array('id'=>1,'description'=>'LearnRest','done'=>false),
             array('id'=>2,'description'=>'LearnRest1','done'=>true),
             array('id'=>3,'description'=>'LearnRest2','done'=>false),
             array('id'=>4,'description'=>'LearnRest3','done'=>true),
             array('id'=>5,'description'=>'LearnRest4','done'=>false),
-            array('id'=>6,'description'=>'LearnRest5','done'=>true)
+            array('id'=>6,'description'=>'LearnRest5','done'=>true),
+            array('id'=>7,'description'=>'LearnRest7','done'=>true)
         );
         
-    echo json_encode($tasks);
-});
+    return $tasks;
+}
 
 $app->run();
 ?>
