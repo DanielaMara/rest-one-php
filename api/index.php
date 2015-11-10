@@ -11,5 +11,9 @@ $app->get('/hello/:name', function($name) use ( $app ) {
     echo "Hi $name, welcome to the REST API's";
 });
 
+$app->get('/tasks', function() use ( $app ) {
+    echo "";
+});
+
 $app->run();
 ?>
