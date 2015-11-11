@@ -42,9 +42,14 @@ $app->get('/tasks/:id', function($id) use ( $app ) {
     }
     else
     {
-        $app->response()->setStatus(404);
-        echo "Not Found";
+        $app->response()->setStatus(204);
     }
+});
+
+$app->post('/tasks', function() use ($app) {
+    $taskJson = $app->request()->getBody();
+    $task = json_decode($taskJson);
+    echo $task->description;
 });
 
 
