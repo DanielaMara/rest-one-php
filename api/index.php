@@ -11,8 +11,9 @@ $app->get('/hello/:name', function($name) use ( $app ) {
     echo "Hi $name, welcome to the REST API's";
 });
 
+
 $app->get('/tasksIsnack/', function() use ( $app ) {
-    $app->response()->header("Content-Type", "aplication-json");
+    $app->response()->header("Content-Type", "aplication/json");
     $tasks = Array(
             "id" => "1",
             "description" => "LearnRest",
@@ -21,14 +22,35 @@ $app->get('/tasksIsnack/', function() use ( $app ) {
     echo json_encode($tasks);
 });
 
+
 $app->get('/tasksEdy/', function() use ( $app ) {
-    $tasks = getTasks();   
+    $tasks = getTasks(); 
+    //Define what kind this response
+    $app->response()->header("Content-Type", "aplication/json");
     echo json_encode($tasks);
 });
 
+
+$app->get('/tasks/:id', function($id) use ( $app ) {
+    $tasks = getTasks(); 
+    $index = array_search($id, array_column($tasks, 'id'));
+    
+    if($index > -1)
+    {
+        $app->response()->header("Content-Type", "aplication/json");
+        echo json_encode($tasks[$index]);
+    }
+    else
+    {
+        $app->response()->setStatus(404);
+        echo "Not Found";
+    }
+});
+
+
 function getTasks()
 {
-    $tasks[] = array(
+    $tasks = array(
             array('id'=>1,'description'=>'LearnRest','done'=>false),
             array('id'=>2,'description'=>'LearnRest1','done'=>true),
             array('id'=>3,'description'=>'LearnRest2','done'=>false),
